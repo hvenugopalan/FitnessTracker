@@ -30,6 +30,7 @@ class ExercisesView extends React.Component {
         })
             .then(res => res.json())
             .then(res => {
+                alert("Exercise deleted!");
                 this.props.update();
             })
             .catch(err => {

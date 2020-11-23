@@ -50,7 +50,7 @@ class ExercisesStackNavigator extends React.Component {
     SignoutButton = () => {
         return <>
             {/* <View style={{ flexDirection: 'row', marginRight: 25 }}> */}
-            <TouchableOpacity onPress={this.props.revokeAccessToken}>
+            <TouchableOpacity onPress={this.props.revokeAccessToken} accessible={true} accessibilityLabel="Sign Out">
                 <Text> <Icon name="sign-out" type='font-awesome' size={30} color="#fb5b5a"></Icon></Text>
             </TouchableOpacity>
             {/* </View> */}

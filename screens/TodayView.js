@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, ActionSheetIOS } from 'react-native';
-import { Card } from 'react-native-elements'
-
+import { Card } from 'react-native-elements';
+import {
+    Platform,
+    UIManager,
+    findNodeHandle
+} from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 
 
 class TodayView extends React.Component {
@@ -10,6 +15,22 @@ class TodayView extends React.Component {
 
         this.getExercisesView = this.getExercisesView.bind(this);
     }
+
+    componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            if (Platform.OS === 'android') {
+                UIManager.sendAccessibilityEvent(
+                    findNodeHandle(this),
+                    UIManager.AccessibilityEventTypes.typeViewFocused
+                );
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
+
 
 
     getExercisesView() {
@@ -32,8 +53,8 @@ class TodayView extends React.Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.scrollView}>
-                <Text style={styles.subheading}>Goals</Text>
+            <ScrollView contentContainerStyle={styles.scrollView} accessible={true} accessibilityHint="Today View">
+                <Text style={styles.subheading} accessible={true} accessibilityHint="Your goals for today are shown below.">Goals</Text>
 
                 <Card key="dailyGoal">
                     <Text style={styles.title}> Daily activity </Text>

@@ -87,27 +87,38 @@ class LoginView extends React.Component {
    */
   render() {
     return (
-      <View style={styles.container} >
+      <View style={styles.container}>
         <Text style={styles.logo}>Fitness Tracker</Text>
-        <Text style={styles.inputText}>Welcome! Please login or signup to continue.</Text>
-        <View style={styles.inputView} >
+        <Text style={styles.inputText} accessible={true} accessibilityLabel="Enter your username and password below to login or click on the signup button at the bottom of the screen." >Welcome! Please login or signup to continue.</Text>
+        <Text>Username</Text>
+        <View style={styles.inputView}>
+
           <TextInput
             value={this.state.username}
             style={styles.inputText}
-            placeholder="Username"
+            // placeholder="Enter username"
+            accessible={true}
+            accessibilityLabel="Username input field"
+            textContentType="username"
+            accessibilityHint="Double tap and then use the keyboard to enter your username. Once you are done, click the password field below."
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ username: text })} />
         </View>
-        <View style={styles.inputView} >
+        <Text style={styles.label}>Password</Text>
+
+        <View style={styles.inputView}>
           <TextInput
             value={this.state.password}
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password"
+            accessible={true}
+            accessibilityLabel="Password input field"
+            accessibilityHint="Double tap and then use the keyboard to enter your password. Once you are done, click the login button below"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ password: text })} />
         </View>
-        <TouchableOpacity style={styles.Btn} onPress={this.handleLogin}>
+        <TouchableOpacity accessibilityLabel="login" accessibilityHint="Double tap to login to the application."
+          style={styles.Btn} onPress={this.handleLogin}>
           <Text>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.BackGBtn} onPress={this.handleSignup}>
